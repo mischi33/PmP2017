@@ -11,41 +11,6 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-//        TextSourceA textSource = new TextSourceA("path");
-//        SimplePipe<List<String>> pipe = new SimplePipe<>(textSource);
-//        try {
-//            pipe.read();
-//        } catch (StreamCorruptedException e) {
-//            e.printStackTrace();
-//        }
 
-        TextSourceA testSource = new TextSourceA("test.txt");
-        try {
-            List<String> testLines = testSource.read();
-           for (String s : testLines) {
-                System.out.println(s);
-            }
-            RemoveSpecialChars SpecialChar= new RemoveSpecialChars(testSource);
-            List<String> testRemove = SpecialChar.process(testLines);
-            LinesToWords testLinesToWords = new LinesToWords(testSource);
-            List<List<String>> testWords = testLinesToWords.process(testLines);
-            CircularShifts testCircularShifts = new CircularShifts(testLinesToWords);
-            List<List<String>>testci=testCircularShifts.process(testWords);
-            for (List<String> line : testci) {
-                
-                System.out.println(line);
-
-            }
-            UselessWordsFilter uselessWordsTest = new UselessWordsFilter(testLinesToWords);
-            List<List<String>> filteredList = uselessWordsTest.process(testci);
-            for (List<String> line : filteredList) {
-                System.out.println(line);
-            }
-            WriteToFileFilter writeToFileTest = new WriteToFileFilter(testLinesToWords);
-            writeToFileTest.process(filteredList);
-
-        } catch (StreamCorruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

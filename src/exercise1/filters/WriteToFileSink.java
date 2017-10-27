@@ -1,29 +1,25 @@
 package exercise1.filters;
 
-import pmp.filter.DataTransformationFilter1;
-import pmp.filter.DataTransformationFilter2;
-import pmp.interfaces.Readable;
+import pmp.filter.Sink;
 
 import java.io.*;
-import java.security.InvalidParameterException;
 import java.util.List;
 
 /**
  * Created by Michelle on 27.10.2017.
  */
-public class WriteToFileFilter extends DataTransformationFilter1<List<List<String>>> {
+public class WriteToFileSink extends Sink<List<List<String>>> {
     private String _file;
 
-    public WriteToFileFilter(Readable<List<List<String>>> input) throws InvalidParameterException {
-        super(input);
-        _file = "index.txt";
+    public WriteToFileSink(String file) {
+        _file = file;
     }
 
     @Override
-    public void process(List<List<String>> entity) {
+    public void write(List<List<String>> value) throws StreamCorruptedException {
         try {
             Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(_file), "UTF-8"));
-            for (List<String> line : entity) {
+            for (List<String> line : value) {
                 for (String word : line) {
                     writer.write(word + " ");
                 }
@@ -33,6 +29,5 @@ public class WriteToFileFilter extends DataTransformationFilter1<List<List<Strin
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
