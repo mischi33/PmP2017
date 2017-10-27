@@ -11,6 +11,9 @@ import java.util.List;
  */
 public class TextSourceA extends Source<List<String>> {
     String _filename;
+    public TextSourceA (String filename) {
+        _filename = filename;
+    }
 
     @Override
     public List<String> read() throws StreamCorruptedException {
