@@ -12,6 +12,7 @@ import pmp.pipes.SimplePipe;
 public class Main {
     public static void main(String[] args) {
        // String targetFilePath = args[0];
+
         Sink writeToFileSink = new WriteToFileSink("index.txt");
         SimplePipe pipe_1 = new SimplePipe(writeToFileSink);
         SortWordsFilter sortFilter = new SortWordsFilter(pipe_1);

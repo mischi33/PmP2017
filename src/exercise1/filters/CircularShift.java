@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class CircularShift extends DataTransformationFilter2<List<String>, List<List<String>>> {
 
-
+    private int indexCount=0;
     public CircularShift(Writeable<List<List<String>>> output) throws InvalidParameterException {
         super(output);
     }
@@ -29,6 +29,7 @@ public class CircularShift extends DataTransformationFilter2<List<String>, List<
             for (int j = 0; j < line.size(); j++) {
                 resultLine.add(line.get(j));
             }
+            resultLine.add(" "+Integer.toString(indexCount));
             result.add(resultLine);
             resultLine= new ArrayList<>();
             String tmp = line.get(0);
@@ -37,6 +38,7 @@ public class CircularShift extends DataTransformationFilter2<List<String>, List<
             shift++;
 
         }
+        indexCount++;
         return result;
     }
 

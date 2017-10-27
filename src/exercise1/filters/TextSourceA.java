@@ -25,11 +25,7 @@ public class TextSourceA extends Source<String> {
     @Override
     public String read() throws StreamCorruptedException {
         try {
-            String line = _br.readLine();
-            while (line != null && line.isEmpty()) {
-                line = _br.readLine();
-            }
-            return line;
+            return _br.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
