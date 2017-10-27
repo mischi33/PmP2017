@@ -1,10 +1,6 @@
 package exercise1;
 
-import exercise1.filters.CircularShifts;
-import exercise1.filters.LinesToWords;
-import exercise1.filters.TextSourceA;
-import exercise1.filters.TextSourceB;
-import exercise1.filters.UselessWordsFilter;
+import exercise1.filters.*;
 import pmp.pipes.SimplePipe;
 
 import java.io.StreamCorruptedException;
@@ -39,10 +35,12 @@ public class Main {
 
             }
             UselessWordsFilter uselessWordsTest = new UselessWordsFilter(testLinesToWords);
-            List<List<String>> filteredList = uselessWordsTest.process(testWords);
+            List<List<String>> filteredList = uselessWordsTest.process(testci);
             for (List<String> line : filteredList) {
                 System.out.println(line);
             }
+            WriteToFileFilter writeToFileTest = new WriteToFileFilter(testLinesToWords);
+            writeToFileTest.process(filteredList);
 
         } catch (StreamCorruptedException e) {
             e.printStackTrace();
