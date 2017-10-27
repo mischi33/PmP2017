@@ -1,10 +1,6 @@
 package exercise1;
 
-import exercise1.filters.CircularShifts;
-import exercise1.filters.LinesToWords;
-import exercise1.filters.TextSourceA;
-import exercise1.filters.TextSourceB;
-import exercise1.filters.UselessWordsFilter;
+import exercise1.filters.*;
 import pmp.pipes.SimplePipe;
 
 import java.io.StreamCorruptedException;
