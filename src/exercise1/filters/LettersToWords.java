@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Michelle on 23.10.2017.
  */
-public class LettersToWords<T extends List<Character>,S extends List<String>> extends DataTransformationFilter2<T, S> {
+public class LettersToWords<T extends List<Character>, S extends List<String>> extends DataTransformationFilter2<T, S> {
 
 
     public LettersToWords(Readable<T> input) throws InvalidParameterException {
@@ -28,7 +28,7 @@ public class LettersToWords<T extends List<Character>,S extends List<String>> ex
                 sb = new StringBuilder();
             }
         }
-        return words;
+        return (S) words;
     }
 
 }

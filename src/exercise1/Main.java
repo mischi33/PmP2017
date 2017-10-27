@@ -1,6 +1,6 @@
 package exercise1;
 
-import exercise1.filters.TextSource;
+import exercise1.filters.TextSourceB;
 import pmp.pipes.SimplePipe;
 
 import java.io.StreamCorruptedException;
@@ -10,7 +10,7 @@ import java.io.StreamCorruptedException;
  */
 public class Main {
     public static void main(String[] args) {
-        TextSource<String> textSource = new TextSource<>("path");
+        TextSourceB<String> textSource = new TextSourceB<>("path");
         SimplePipe<String> pipe = new SimplePipe<>(textSource);
         try {
             pipe.read();

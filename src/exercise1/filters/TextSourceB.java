@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TextSource<T> extends Source {
+public class TextSourceB<T extends List<Character>> extends Source {
     String _filename;
 
-    public TextSource(String filename) {
+    public TextSourceB(String filename) {
         super();
         _filename = filename;
     }
 
     @Override
-    public Object read() throws StreamCorruptedException {
+    public List<Character> read() throws StreamCorruptedException {
         List<Character> characters = new ArrayList<>();
         try {
             Charset encoding = Charset.forName("UTF-8");
