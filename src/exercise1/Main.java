@@ -6,7 +6,6 @@ import exercise1.filters.TextSourceB;
 import pmp.pipes.SimplePipe;
 
 import java.io.StreamCorruptedException;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,9 +24,15 @@ public class Main {
         TextSourceA testSource = new TextSourceA("test.txt");
         try {
             List<String> testLines = testSource.read();
-            Collections.sort(testLines);
             for (String s : testLines) {
                 System.out.println(s);
+            }
+            LinesToWords testLinesToWords = new LinesToWords(testSource);
+            List<List<String>> testWords = testLinesToWords.process(testLines);
+            for (List<String> line : testWords) {
+                for (String word : line) {
+                    System.out.println(word);
+                }
             }
         } catch (StreamCorruptedException e) {
             e.printStackTrace();

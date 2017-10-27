@@ -19,7 +19,7 @@ public class LinesToWords extends DataTransformationFilter2<List<String>, List<L
 
 
     @Override
-    protected List<List<String>> process(List<String> entity) {
+    public List<List<String>> process(List<String> entity) {
         List<List<String>> words = new ArrayList<>();
         for (String s : entity) {
             words.add(Arrays.asList(s.split(" ")));
