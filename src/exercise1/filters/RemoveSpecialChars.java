@@ -22,7 +22,7 @@ public class RemoveSpecialChars extends DataTransformationFilter2<String, String
     protected String process(String entity) {
         String newEntity = entity.replaceAll("[^\\w\\s]","");
         newEntity = newEntity.replaceAll("  +", "");
-        newEntity = newEntity.replaceAll("(?m)^\\s+$", "");
+        newEntity = newEntity.replaceAll("^\\s+","");
         return newEntity;
     }
 }

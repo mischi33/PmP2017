@@ -4,8 +4,6 @@ import pmp.filter.Source;
 import pmp.interfaces.Writeable;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Michelle on 27.10.2017.
@@ -14,7 +12,7 @@ public class TextSourceA extends Source<String> {
     private String _filename;
     private BufferedReader _br;
 
-    public TextSourceA (Writeable<String> output, String filename) {
+    public TextSourceA(Writeable<String> output, String filename) {
         super(output);
         _filename = filename;
         try {
@@ -27,7 +25,11 @@ public class TextSourceA extends Source<String> {
     @Override
     public String read() throws StreamCorruptedException {
         try {
-            return _br.readLine();
+            String line = _br.readLine();
+            while (line != null && line.isEmpty()) {
+                line = _br.readLine();
+            }
+            return line;
         } catch (IOException e) {
             e.printStackTrace();
         }
