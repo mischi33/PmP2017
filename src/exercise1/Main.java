@@ -1,5 +1,6 @@
 package exercise1;
 
+import exercise1.filters.CircularShifts;
 import exercise1.filters.LinesToWords;
 import exercise1.filters.TextSourceA;
 import exercise1.filters.TextSourceB;
@@ -24,15 +25,17 @@ public class Main {
         TextSourceA testSource = new TextSourceA("test.txt");
         try {
             List<String> testLines = testSource.read();
-            for (String s : testLines) {
+           for (String s : testLines) {
                 System.out.println(s);
             }
             LinesToWords testLinesToWords = new LinesToWords(testSource);
             List<List<String>> testWords = testLinesToWords.process(testLines);
-            for (List<String> line : testWords) {
-                for (String word : line) {
-                    System.out.println(word);
-                }
+            CircularShifts testCircularShifts = new CircularShifts(testLinesToWords);
+            List<List<String>>testci=testCircularShifts.process(testWords);
+            for (List<String> line : testci) {
+                
+                System.out.println(line);
+
             }
         } catch (StreamCorruptedException e) {
             e.printStackTrace();
