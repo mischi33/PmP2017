@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Michelle on 27.10.2017.
  */
-public class TextSourceA<T extends List<String[]>> extends Source {
+public class TextSourceA extends Source<List<String[]>> {
     String _filename;
 
     @Override

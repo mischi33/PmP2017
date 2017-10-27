@@ -2,6 +2,7 @@ package exercise1.filters;
 
 import pmp.filter.DataTransformationFilter2;
 import pmp.interfaces.Readable;
+import pmp.interfaces.Writeable;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -10,15 +11,15 @@ import java.util.List;
 /**
  * Created by Michelle on 23.10.2017.
  */
-public class LettersToWords<T extends List<Character>, S extends List<String>> extends DataTransformationFilter2<T, S> {
+public class LettersToWords extends DataTransformationFilter2<List<Character>, List<String>> {
 
 
-    public LettersToWords(Readable<T> input) throws InvalidParameterException {
-        super(input);
+    public LettersToWords(Writeable<List<String>> output) throws InvalidParameterException {
+        super(output);
     }
 
     @Override
-    protected S process(T entity) {
+    protected List<String> process(List<Character> entity) {
         List<String> words = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
         for (Character c : entity) {
@@ -28,7 +29,6 @@ public class LettersToWords<T extends List<Character>, S extends List<String>> e
                 sb = new StringBuilder();
             }
         }
-        return (S) words;
+        return words;
     }
-
 }

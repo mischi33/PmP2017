@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TextSourceB<T extends List<Character>> extends Source {
+public class TextSourceB extends Source<List<Character>> {
     String _filename;
 
     public TextSourceB(String filename) {
