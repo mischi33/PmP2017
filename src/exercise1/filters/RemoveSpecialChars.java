@@ -14,10 +14,9 @@ import java.util.List;
 public class RemoveSpecialChars extends DataTransformationFilter2<List<String>, List<String>> {
 
 
-    public RemoveSpecialChars(Readable<List<String>> input) throws InvalidParameterException {
-        super(input);
+    public RemoveSpecialChars(Writeable<List<String>> output) throws InvalidParameterException {
+        super(output);
     }
-
 
     @Override
     protected List<String> process(List<String> entity) {

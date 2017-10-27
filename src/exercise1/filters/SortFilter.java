@@ -2,6 +2,7 @@ package exercise1.filters;
 
 import pmp.filter.DataTransformationFilter2;
 import pmp.interfaces.Readable;
+import pmp.interfaces.Writeable;
 
 import java.security.InvalidParameterException;
 import java.util.Collections;
@@ -12,8 +13,9 @@ import java.util.List;
  */
 public class SortFilter extends DataTransformationFilter2 <List<String>, List<String>>{
 
-    public SortFilter(Readable<List<String>> input) throws InvalidParameterException {
-        super(input);
+
+    public SortFilter(Writeable<List<String>> output) throws InvalidParameterException {
+        super(output);
     }
 
     @Override

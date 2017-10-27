@@ -16,6 +16,9 @@ public class WriteToFileSink extends Sink<List<String>> {
         super(input);
         _file = file;
     }
+    public WriteToFileSink( String file) {
+        _file = file;
+    }
 
     @Override
     public void write(List<String> value) throws StreamCorruptedException {

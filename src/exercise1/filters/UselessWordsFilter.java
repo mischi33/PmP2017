@@ -2,6 +2,7 @@ package exercise1.filters;
 
 import pmp.filter.DataTransformationFilter2;
 import pmp.interfaces.Readable;
+import pmp.interfaces.Writeable;
 
 import java.io.*;
 import java.security.InvalidParameterException;
@@ -15,7 +16,7 @@ import java.util.List;
 public class UselessWordsFilter extends DataTransformationFilter2<List<List<String>>, List<List<String>>>{
     private List<String> _uselessWords;
 
-    public UselessWordsFilter(Readable<List<List<String>>> input) throws InvalidParameterException {
+    public UselessWordsFilter(Writeable<List<List<String>>> input) throws InvalidParameterException {
         super(input);
         List<String> uselessWords = new ArrayList<>();
         try {

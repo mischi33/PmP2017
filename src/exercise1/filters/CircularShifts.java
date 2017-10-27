@@ -2,6 +2,7 @@ package exercise1.filters;
 
 import pmp.filter.DataTransformationFilter2;
 import pmp.interfaces.Readable;
+import pmp.interfaces.Writeable;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -14,8 +15,8 @@ public class CircularShifts extends DataTransformationFilter2<List<List<String>>
 
     List<List<String>> result = new ArrayList<>();
 
-    public CircularShifts(Readable<List<List<String>>> input) throws InvalidParameterException {
-        super(input);
+    public CircularShifts(Writeable<List<List<String>>> output) throws InvalidParameterException {
+        super(output);
     }
 
     @Override

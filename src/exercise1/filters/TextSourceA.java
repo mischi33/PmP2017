@@ -1,6 +1,7 @@
 package exercise1.filters;
 
 import pmp.filter.Source;
+import pmp.interfaces.Writeable;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,7 +12,8 @@ import java.util.List;
  */
 public class TextSourceA extends Source<List<String>> {
     String _filename;
-    public TextSourceA (String filename) {
+    public TextSourceA (Writeable<List<String>> output, String filename) {
+        super(output);
         _filename = filename;
     }
 
