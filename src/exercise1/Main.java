@@ -37,10 +37,12 @@ public class Main {
 
             }
             UselessWordsFilter uselessWordsTest = new UselessWordsFilter(testLinesToWords);
-            List<List<String>> filteredList = uselessWordsTest.process(testWords);
+            List<List<String>> filteredList = uselessWordsTest.process(testci);
             for (List<String> line : filteredList) {
                 System.out.println(line);
             }
+            WriteToFileFilter writeToFileTest = new WriteToFileFilter(testLinesToWords);
+            writeToFileTest.process(filteredList);
 
         } catch (StreamCorruptedException e) {
             e.printStackTrace();
