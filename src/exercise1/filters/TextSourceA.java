@@ -10,28 +10,27 @@ import java.util.List;
 /**
  * Created by Michelle on 27.10.2017.
  */
-public class TextSourceA extends Source<List<String>> {
-    String _filename;
-    public TextSourceA (Writeable<List<String>> output, String filename) {
+public class TextSourceA extends Source<String> {
+    private String _filename;
+    private BufferedReader _br;
+
+    public TextSourceA (Writeable<String> output, String filename) {
         super(output);
         _filename = filename;
+        try {
+            _br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(_filename))));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public List<String> read() throws StreamCorruptedException {
-        List<String> lines = new ArrayList<>();
+    public String read() throws StreamCorruptedException {
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(_filename))));
-            String line;
-            while ((line = br.readLine()) != null) {
-                lines.add(line);
-            }
-            br.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return _br.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return lines;
+        return null;
     }
 }

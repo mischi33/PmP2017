@@ -11,22 +11,18 @@ import java.util.List;
 /**
  * Created by Flo on 27.10.17.
  */
-public class RemoveSpecialChars extends DataTransformationFilter2<List<String>, List<String>> {
+public class RemoveSpecialChars extends DataTransformationFilter2<String, String> {
 
 
-    public RemoveSpecialChars(Writeable<List<String>> output) throws InvalidParameterException {
+    public RemoveSpecialChars(Writeable<String> output) throws InvalidParameterException {
         super(output);
     }
 
     @Override
-    protected List<String> process(List<String> entity) {
-
-        List<String>result= new ArrayList<String>();
-
-        for (int i = 0; i < entity.size(); i++) {
-           result.add(entity.get(i).replaceAll("[^\\w\\s]",""));
-        }
-
-        return result;
+    protected String process(String entity) {
+        String newEntity = entity.replaceAll("[^\\w\\s]","");
+        newEntity = newEntity.replaceAll("  +", "");
+        newEntity = newEntity.replaceAll("(?m)^\\s+$", "");
+        return newEntity;
     }
 }
