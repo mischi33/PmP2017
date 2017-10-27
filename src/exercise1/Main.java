@@ -1,9 +1,6 @@
 package exercise1;
 
-import exercise1.filters.CircularShifts;
-import exercise1.filters.LinesToWords;
-import exercise1.filters.TextSourceA;
-import exercise1.filters.TextSourceB;
+import exercise1.filters.*;
 import pmp.pipes.SimplePipe;
 
 import java.io.StreamCorruptedException;
@@ -28,12 +25,14 @@ public class Main {
            for (String s : testLines) {
                 System.out.println(s);
             }
+            RemoveSpecialChars SpecialChar= new RemoveSpecialChars(testSource);
+            List<String> testRemove = SpecialChar.process(testLines);
             LinesToWords testLinesToWords = new LinesToWords(testSource);
             List<List<String>> testWords = testLinesToWords.process(testLines);
-            CircularShifts testCircularShifts = new CircularShifts(testLinesToWords);
-            List<List<String>>testci=testCircularShifts.process(testWords);
-            for (List<String> line : testci) {
-                
+//            CircularShifts testCircularShifts = new CircularShifts(testLinesToWords);
+//            List<List<String>>testci=testCircularShifts.process(testWords);
+            for (String line : testRemove) {
+
                 System.out.println(line);
 
             }
