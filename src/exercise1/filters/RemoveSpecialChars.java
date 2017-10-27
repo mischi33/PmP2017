@@ -2,6 +2,7 @@ package exercise1.filters;
 
 import pmp.filter.DataTransformationFilter2;
 import pmp.interfaces.Readable;
+import pmp.interfaces.Writeable;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -17,8 +18,9 @@ public class RemoveSpecialChars extends DataTransformationFilter2<List<String>, 
         super(input);
     }
 
+
     @Override
-    public List<String> process(List<String> entity) {
+    protected List<String> process(List<String> entity) {
 
         List<String>result= new ArrayList<String>();
 

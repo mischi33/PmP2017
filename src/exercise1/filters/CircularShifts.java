@@ -18,8 +18,8 @@ public class CircularShifts extends DataTransformationFilter2<List<List<String>>
         super(input);
     }
 
-
-    public List<List<String>> process(List<List<String>> entity) {
+    @Override
+    protected List<List<String>> process(List<List<String>> entity) {
         for (int i = 0; i < entity.size(); i++) {
             int shift = 0;
             List<String> line = new ArrayList<>();
