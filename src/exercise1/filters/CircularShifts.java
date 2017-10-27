@@ -26,7 +26,7 @@ public class CircularShifts extends DataTransformationFilter2<List<ArrayList<Str
             ArrayList<String> line = entity.get(i);
             ArrayList<String> resultLine = new ArrayList<>();
             while (shift < line.size()) {
-                for (int j = 0;j<line.size(); j++) {
+                for (int j = 0; j < line.size(); j++) {
                     resultLine.clear();
                     resultLine.add(line.get(j));
                 }
@@ -38,4 +38,8 @@ public class CircularShifts extends DataTransformationFilter2<List<ArrayList<Str
             }
 
         }
+        return result;
+    }
+
+
 }
