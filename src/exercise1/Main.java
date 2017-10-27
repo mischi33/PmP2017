@@ -1,6 +1,10 @@
 package exercise1;
 
-import exercise1.filters.*;
+import exercise1.filters.CircularShifts;
+import exercise1.filters.LinesToWords;
+import exercise1.filters.TextSourceA;
+import exercise1.filters.TextSourceB;
+import exercise1.filters.UselessWordsFilter;
 import pmp.pipes.SimplePipe;
 
 import java.io.StreamCorruptedException;
@@ -29,13 +33,19 @@ public class Main {
             List<String> testRemove = SpecialChar.process(testLines);
             LinesToWords testLinesToWords = new LinesToWords(testSource);
             List<List<String>> testWords = testLinesToWords.process(testLines);
-//            CircularShifts testCircularShifts = new CircularShifts(testLinesToWords);
-//            List<List<String>>testci=testCircularShifts.process(testWords);
-            for (String line : testRemove) {
-
+            CircularShifts testCircularShifts = new CircularShifts(testLinesToWords);
+            List<List<String>>testci=testCircularShifts.process(testWords);
+            for (List<String> line : testci) {
+                
                 System.out.println(line);
 
             }
+            UselessWordsFilter uselessWordsTest = new UselessWordsFilter(testLinesToWords);
+            List<List<String>> filteredList = uselessWordsTest.process(testWords);
+            for (List<String> line : filteredList) {
+                System.out.println(line);
+            }
+
         } catch (StreamCorruptedException e) {
             e.printStackTrace();
         }
