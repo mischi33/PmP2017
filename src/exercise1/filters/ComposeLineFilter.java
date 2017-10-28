@@ -13,7 +13,7 @@ import java.util.List;
 public class ComposeLineFilter extends DataCompositionFilter<StringBuilder, List<String>> {
     private int _linelength = 0;
     private int neededLength;
-    private StringBuilder lostValue;
+    private String lostValue;
 
     public ComposeLineFilter(Writeable<List<String>> output, int lineLength) throws InvalidParameterException {
         super(output);
