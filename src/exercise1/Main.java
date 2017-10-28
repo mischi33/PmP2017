@@ -12,8 +12,8 @@ import pmp.pipes.SimplePipe;
  */
 public class Main {
     public static void main(String[] args) {
-        String alignment = "right";
-        int lineLength = 10;
+        String alignment = "center";
+        int lineLength = 15;
         String path = "";
 
         if (args.length > 0) {
@@ -70,11 +70,11 @@ public class Main {
         Sink indexSink = new WriteToFileSink(path + "indexB.txt");
         Sink storySink = new WriteNewTextToFileSink(path + "aliceInWonderlandNew.txt");
         SimplePipe pipe_1 = new SimplePipe(indexSink);
-        AlignmentFilter alignmentFilter1 = new AlignmentFilter(pipe_1, lineLength, alignment);
-        SimplePipe pipe_a = new SimplePipe((Writeable) alignmentFilter1);
-        SortWordsFilter sortWordsFilter = new SortWordsFilter(pipe_a);
+        SortWordsFilter sortWordsFilter = new SortWordsFilter(pipe_1);
         SimplePipe pipe_2 = new SimplePipe((Writeable) sortWordsFilter);
-        WordsToLines wordsToLines = new WordsToLines(pipe_2);
+        AlignmentFilter alignmentFilter1 = new AlignmentFilter(pipe_2, lineLength, alignment);
+        SimplePipe pipe_a = new SimplePipe((Writeable) alignmentFilter1);
+        WordsToLines wordsToLines = new WordsToLines(pipe_a);
         SimplePipe pipe_3 = new SimplePipe((Writeable) wordsToLines);
         UselessWordsFilter uselessWordsFilter = new UselessWordsFilter(pipe_3);
         SimplePipe pipe_4 = new SimplePipe((Writeable) uselessWordsFilter);

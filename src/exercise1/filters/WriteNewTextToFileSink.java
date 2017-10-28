@@ -29,7 +29,7 @@ public class WriteNewTextToFileSink extends Sink<List<String>> {
         if (value != null) {
             try {
                 for (String line : value) {
-                    _writer.write(line + " ");
+                    _writer.write(line);
                 }
                 _writer.write(System.getProperty("line.separator"));
                 _writer.flush();

@@ -39,7 +39,7 @@ public class AlignmentFilter extends DataTransformationFilter2<List<String>, Lis
                 alignList.add(" ");
             }
         }
-        if (align.equals("centre")) {
+        if (align.equals("center")) {
             for (int i = neededSpaces / 2; 0 < i; i--) {
                 alignList.add(" ");
             }
@@ -50,7 +50,7 @@ public class AlignmentFilter extends DataTransformationFilter2<List<String>, Lis
             for(String s : list){
                 alignList.add(s);
             }
-            
+
         }
 
         return alignList;
