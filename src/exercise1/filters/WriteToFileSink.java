@@ -13,17 +13,6 @@ public class WriteToFileSink extends Sink<List<String>> {
     private String _file;
     private BufferedWriter _writer;
 
-    public WriteToFileSink(Readable<List<String>> input, String file) {
-        super(input);
-        _file = file;
-        try {
-            _writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(_file), "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
 
     public WriteToFileSink(String file) {
         _file = file;
