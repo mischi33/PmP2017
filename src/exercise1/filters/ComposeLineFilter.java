@@ -25,10 +25,10 @@ public class ComposeLineFilter extends DataCompositionFilter<StringBuilder, List
     protected boolean fillEntity(StringBuilder nextVal, List<String> entity) {
         if (nextVal!=null && lostValue != null) {
             entity.add(lostValue.toString());
+            _linelength=lostValue.length();
             lostValue = null;
         }
         if (nextVal != null && (_linelength + nextVal.length() + 1) <= neededLength) {
-            entity.add(" ");
             entity.add(nextVal.toString());
             _linelength=_linelength+nextVal.length()+1;
             return false;
