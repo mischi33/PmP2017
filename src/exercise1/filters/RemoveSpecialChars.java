@@ -22,11 +22,12 @@ public class RemoveSpecialChars extends DataTransformationFilter2<List<String>, 
 
         for (String s : entity) {
             /**
-             * "[^\w\s]" removes all special characters (except "_")
+             * "[^\w\s]" removes all special characters from the whole text (except "_" "-" and "'")
+             * "^[\\W]+" removes all special chars at the beginning of a sentence.
              * "_" removes underscore since this does not work with the first regex
-             * "-" "--" replaces this with a space since some words would be unnecessarily concatenated.
+             * "^[0-9]+" removes numbers at the beginning of a line.
              */
-            newEntity.add(s.replaceAll("-", " ").replaceAll("--", " ").replaceAll("[^\\w\\s]", "").replaceAll("_", ""));
+            newEntity.add(s.replaceAll("[^\\w\\s-']", "").replaceAll("^[\\W]+", "").replaceAll("_", "").replaceAll("^[0-9]+", ""));
 
         }
         return newEntity;
