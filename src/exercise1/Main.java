@@ -90,7 +90,7 @@ public class Main {
         SimplePipe pipe_7 = new SimplePipe((Writeable) composeLineFilter);
         ComposeWordFilter composeWordFilter = new ComposeWordFilter(pipe_7);
         SimplePipe pipe_8 = new SimplePipe((Writeable) composeWordFilter);
-        Source source = new TextSourceB(pipe_8, "test.txt");
+        Source source = new TextSourceB(pipe_8, "aliceInWonderland.txt");
         source.run();
     }
 
