@@ -42,8 +42,8 @@ public class Main {
         Sink indexSink = new WriteToFileSink(path + "indexB.txt");
         Sink storySink = new WriteToFileSink(path + "aliceInWonderlandNew.txt");
         SimplePipe pipe_1 = new SimplePipe(indexSink);
-//        AlignmentFilter alignmentFilter1 = new AlignmentFilter(pipe_1, 10, "left");
-//        SimplePipe pipe_a = new SimplePipe((Writeable) alignmentFilter1);
+//       AlignmentFilter alignmentFilter1 = new AlignmentFilter(pipe_1, 10, "left");
+//       SimplePipe pipe_a = new SimplePipe((Writeable) alignmentFilter1);
         SortWordsFilter sortWordsFilter = new SortWordsFilter(pipe_1);
         SimplePipe pipe_2 = new SimplePipe((Writeable) sortWordsFilter);
         WordsToLines wordsToLines = new WordsToLines(pipe_2);
