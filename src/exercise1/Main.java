@@ -12,9 +12,37 @@ import pmp.pipes.SimplePipe;
  */
 public class Main {
     public static void main(String[] args) {
-       // String targetFilePath = args[0];
-         //exerciseA("");
-         exerciseB("");
+        String alignment = "left";
+        int lineLength = 0;
+        String path = "";
+
+        if (args.length > 0) {
+            if (args[0].equals("-h")) {
+                System.out.println("HELP for Exercise1 Pipes&Filters");
+                System.out.println("First Parameter: Alignment -> alignment of the result files.");
+                System.out.println("Second Parameter: Line Length -> line length of each line in the index file and the newly created source file.");
+                System.out.println("Third Parameter: Path -> choose the directory where the result files should be stored (existing Directory).");
+                System.out.println("Example: java -jar PipesAndFilters.jar center 60 C:\\John\\Documents\\");
+                System.exit(0);
+            }
+
+            alignment = args[0];
+            lineLength = Integer.valueOf(args[1]);
+            path = args[2];
+        }
+
+        if (alignment == null || alignment.isEmpty() || (!"right".equalsIgnoreCase(alignment) && !"left".equalsIgnoreCase(alignment) && !"center".equalsIgnoreCase(alignment))) {
+            System.out.println("Unknown alignment-option, default value [left] will be used.");
+            alignment = "left";
+        }
+        if (path == null || path.isEmpty()) {
+            path = "";
+        }
+        if (lineLength == 0) {
+            lineLength = 60;
+        }
+        exerciseA(path);
+        exerciseB(path, alignment, lineLength);
 
 
     }
@@ -38,12 +66,10 @@ public class Main {
         source.run();
     }
 
-    private static void exerciseB(String path) {
+    private static void exerciseB(String path, String alignment, int lineLength) {
         Sink indexSink = new WriteToFileSink(path + "indexB.txt");
         Sink storySink = new WriteToFileSink(path + "aliceInWonderlandNew.txt");
         SimplePipe pipe_1 = new SimplePipe(indexSink);
-//        AlignmentFilter alignmentFilter1 = new AlignmentFilter(pipe_1, 10, "left");
-//        SimplePipe pipe_a = new SimplePipe((Writeable) alignmentFilter1);
         SortWordsFilter sortWordsFilter = new SortWordsFilter(pipe_1);
         SimplePipe pipe_2 = new SimplePipe((Writeable) sortWordsFilter);
         WordsToLines wordsToLines = new WordsToLines(pipe_2);
@@ -51,10 +77,10 @@ public class Main {
         UselessWordsFilter uselessWordsFilter = new UselessWordsFilter(pipe_3);
         SimplePipe pipe_4 = new SimplePipe((Writeable) uselessWordsFilter);
         CircularShift circularShift = new CircularShift(pipe_4);
-        SimplePipe pipe_5 = new SimplePipe((Writeable) storySink);
-        AlignmentFilter alignmentFilter = new AlignmentFilter(pipe_5, 10, "right");
-        DoubleExitPipe doubleExitPipe = new DoubleExitPipe(alignmentFilter, circularShift);
-        ComposeLineFilter composeLineFilter = new ComposeLineFilter(doubleExitPipe, 10);
+        DoubleExitPipe doubleExitPipe = new DoubleExitPipe(storySink, circularShift);
+        AlignmentFilter alignmentFilter = new AlignmentFilter(doubleExitPipe, lineLength, alignment);
+        SimplePipe pipe_5 = new SimplePipe((Writeable) alignmentFilter);
+        ComposeLineFilter composeLineFilter = new ComposeLineFilter(pipe_5, lineLength);
         SimplePipe pipe_6 = new SimplePipe((Writeable) composeLineFilter);
         ComposeWordFilter composeWordFilter = new ComposeWordFilter(pipe_6);
         SimplePipe pipe_7 = new SimplePipe((Writeable) composeWordFilter);
