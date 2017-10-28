@@ -12,8 +12,14 @@ import pmp.pipes.SimplePipe;
 public class Main {
     public static void main(String[] args) {
        // String targetFilePath = args[0];
+        exerciseA("");
+        exerciseB("");
 
-        Sink writeToFileSink = new WriteToFileSink("index.txt");
+
+    }
+
+    private static void exerciseA(String path) {
+        Sink writeToFileSink = new WriteToFileSink(path + "indexA.txt");
         SimplePipe pipe_1 = new SimplePipe(writeToFileSink);
         SortWordsFilter sortFilter = new SortWordsFilter(pipe_1);
         SimplePipe pipe_2 = new SimplePipe((Writeable) sortFilter);
@@ -29,8 +35,9 @@ public class Main {
         SimplePipe pipe_7 = new SimplePipe((Writeable) removeSpecialChars);
         Source source = new TextSourceA(pipe_7, "aliceInWonderland.txt");
         source.run();
-
-
-
     }
+
+    private static void exerciseB(String s) {
+    }
+
 }

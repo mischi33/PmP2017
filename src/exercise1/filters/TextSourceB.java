@@ -9,32 +9,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TextSourceB extends Source<List<Character>> {
+public class TextSourceB extends Source<Character> {
     String _filename;
+    BufferedReader _br;
 
     public TextSourceB(String filename) {
         super();
         _filename = filename;
+        try {
+            _br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(_filename))));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public List<Character> read() throws StreamCorruptedException {
-        List<Character> characters = new ArrayList<>();
+    public Character read() throws StreamCorruptedException {
         try {
-            Charset encoding = Charset.forName("UTF-8");
-            InputStream in = new FileInputStream(_filename);
-            Reader reader = new InputStreamReader(in, encoding);
-            Reader buffer = new BufferedReader(reader);
-
-            int c;
-            while ((c = buffer.read()) != -1) {
-                characters.add((char) c);
+            int charVal;
+            if ((charVal = _br.read()) != -1) {
+                return (char) charVal;
+            } else {
+                return null;
             }
-
-            buffer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return characters;
+        return null;
     }
 }
