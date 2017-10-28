@@ -70,9 +70,9 @@ public class Main {
         Sink indexSink = new WriteToFileSink(path + "indexB.txt");
         Sink storySink = new WriteToFileSink(path + "aliceInWonderlandNew.txt");
         SimplePipe pipe_1 = new SimplePipe(indexSink);
-        AlignmentFilter alignmentFilter1 = new AlignmentFilter(pipe_1, 10, "left");
+        AlignmentFilter alignmentFilter1 = new AlignmentFilter(pipe_1, 10, "right");
         SimplePipe pipe_a = new SimplePipe((Writeable) alignmentFilter1);
-        SortWordsFilter sortWordsFilter = new SortWordsFilter(pipe_1);
+        SortWordsFilter sortWordsFilter = new SortWordsFilter(pipe_a);
         SimplePipe pipe_2 = new SimplePipe((Writeable) sortWordsFilter);
         WordsToLines wordsToLines = new WordsToLines(pipe_2);
         SimplePipe pipe_3 = new SimplePipe((Writeable) wordsToLines);
