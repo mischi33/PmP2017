@@ -8,20 +8,19 @@ import java.security.InvalidParameterException;
 /**
  * Created by Michelle on 27.10.2017.
  */
-public class ComposeWordFilter extends DataCompositionFilter<Character, String> {
+public class ComposeWordFilter extends DataCompositionFilter<Character, StringBuilder> {
 
 
-    public ComposeWordFilter(Writeable<String> output) throws InvalidParameterException {
+    public ComposeWordFilter(Writeable<StringBuilder> output) throws InvalidParameterException {
         super(output);
     }
 
     @Override
-    protected boolean fillEntity(Character nextVal, String entity) {
+    protected boolean fillEntity(Character nextVal, StringBuilder entity) {
         StringBuilder sb= new StringBuilder();
         sb.append(entity);
-        if (nextVal != ' ' && nextVal != '\n' && nextVal != '\t') {
+        if (nextVal != null && nextVal != ' ' && nextVal != '\n' && nextVal != '\t') {
             sb.append(nextVal);
-            entity=sb.toString();
             return false;
         } else {
             return true;
@@ -29,7 +28,7 @@ public class ComposeWordFilter extends DataCompositionFilter<Character, String> 
     }
 
     @Override
-    protected String getNewEntityObject() {
-        return new String();
+    protected StringBuilder getNewEntityObject() {
+        return new StringBuilder();
     }
 }

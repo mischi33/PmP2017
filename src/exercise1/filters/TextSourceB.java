@@ -10,8 +10,8 @@ import java.util.List;
 
 
 public class TextSourceB extends Source<Character> {
-    String _filename;
-    BufferedReader _br;
+    private String _filename;
+    private BufferedReader _br;
 
     public TextSourceB(Writeable<Character> output, String filename) {
         super(output);

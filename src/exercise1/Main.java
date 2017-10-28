@@ -13,8 +13,8 @@ import pmp.pipes.SimplePipe;
 public class Main {
     public static void main(String[] args) {
        // String targetFilePath = args[0];
-//        exerciseA("");
-        exerciseB("");
+         exerciseA("");
+       // exerciseB("");
 
 
     }

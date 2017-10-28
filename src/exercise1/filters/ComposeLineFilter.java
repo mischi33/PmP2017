@@ -10,10 +10,10 @@ import java.util.List;
 /**
  * Created by Flo on 28.10.17.
  */
-public class ComposeLineFilter extends DataCompositionFilter<String, List<String>> {
+public class ComposeLineFilter extends DataCompositionFilter<StringBuilder, List<String>> {
     private int _linelength = 0;
     private int neededLength;
-    private String lostValue;
+    private StringBuilder lostValue;
 
     public ComposeLineFilter(Writeable<List<String>> output, int lineLenth) throws InvalidParameterException {
         super(output);
@@ -21,13 +21,13 @@ public class ComposeLineFilter extends DataCompositionFilter<String, List<String
     }
 
     @Override
-    protected boolean fillEntity(String nextVal, List<String> entity) {
+    protected boolean fillEntity(StringBuilder nextVal, List<String> entity) {
         if (lostValue != null) {
-            entity.add(lostValue);
+            entity.add(lostValue.toString());
             lostValue = null;
         }
         if (nextVal != null && (_linelength + nextVal.length() + 1) <= neededLength) {
-            entity.add(nextVal);
+            entity.add(nextVal.toString());
             entity.add(" ");
             return false;
         }

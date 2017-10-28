@@ -38,7 +38,7 @@ public class UselessWordsFilter extends DataTransformationFilter2<List<List<Stri
         Iterator<List<String>> lineIterator = entity.iterator();
         while (lineIterator.hasNext()) {
             List<String> line = lineIterator.next();
-            if (_uselessWords.containsKey(line.get(0).toUpperCase())) {
+            if (_uselessWords.containsKey(line.get(0).toUpperCase()) || line.get(0).equals("")) {
                 lineIterator.remove();
             }
 
