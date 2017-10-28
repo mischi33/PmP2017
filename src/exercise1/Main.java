@@ -12,8 +12,8 @@ import pmp.pipes.SimplePipe;
  */
 public class Main {
     public static void main(String[] args) {
-        String alignment = "center";
-        int lineLength = 10;
+        String alignment = "right";
+        int lineLength = 60;
         String path = "";
 
         if (args.length > 0) {
@@ -89,7 +89,7 @@ public class Main {
         SimplePipe pipe_6 = new SimplePipe((Writeable) composeLineFilter);
         ComposeWordFilter composeWordFilter = new ComposeWordFilter(pipe_6);
         SimplePipe pipe_7 = new SimplePipe((Writeable) composeWordFilter);
-        Source source = new TextSourceB(pipe_7, "test.txt");
+        Source source = new TextSourceB(pipe_7, "aliceInWonderland.txt");
         source.run();
     }
 

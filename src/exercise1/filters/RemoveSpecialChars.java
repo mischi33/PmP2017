@@ -23,9 +23,10 @@ public class RemoveSpecialChars extends DataTransformationFilter2<List<String>, 
         for (String s : entity) {
             /**
              * "[^\w\s]" removes all special characters (except "_")
-             * * "_" removes underscore since this does not work with the first regex
+             * "_" removes underscore since this does not work with the first regex
+             * "-" "--" replaces this with a space since some words would be unnecessarily concatenated.
              */
-            newEntity.add(s.replaceAll("[^\\w\\s]", "").replaceAll("_", ""));
+            newEntity.add(s.replaceAll("-", " ").replaceAll("--", " ").replaceAll("[^\\w\\s]", "").replaceAll("_", ""));
 
         }
         return newEntity;
