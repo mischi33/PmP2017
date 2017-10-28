@@ -13,8 +13,8 @@ public class TextSourceB extends Source<Character> {
     String _filename;
     BufferedReader _br;
 
-    public TextSourceB(String filename) {
-        super();
+    public TextSourceB(Writeable<Character> output, String filename) {
+        super(output);
         _filename = filename;
         try {
             _br = new BufferedReader(new InputStreamReader(new FileInputStream(new File(_filename))));

@@ -17,7 +17,7 @@ public class ComposeWordFilter extends DataCompositionFilter<Character, String> 
 
     @Override
     protected boolean fillEntity(Character nextVal, String entity) {
-        if (nextVal != ' ' && nextVal != '\n' && nextVal != '\t') {
+        if (nextVal != null && nextVal != ' ' && nextVal != '\n' && nextVal != '\r' && nextVal != '\t') {
             entity=entity+nextVal;
             return false;
         } else {

@@ -10,12 +10,12 @@ import java.util.List;
 /**
  * Created by Flo on 28.10.17.
  */
-public class AlignementFilter extends DataTransformationFilter2<List<String>, List<String>> {
+public class AlignmentFilter extends DataTransformationFilter2<List<String>, List<String>> {
 
     private int _lineLength;
     private String _align;
 
-    public AlignementFilter(Writeable<List<String>> output, int lineLength, String align) throws InvalidParameterException {
+    public AlignmentFilter(Writeable<List<String>> output, int lineLength, String align) throws InvalidParameterException {
         super(output);
         _lineLength = lineLength;
         _align = align;
