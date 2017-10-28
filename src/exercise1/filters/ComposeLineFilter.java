@@ -15,10 +15,11 @@ public class ComposeLineFilter extends DataCompositionFilter<StringBuilder, List
     private int neededLength;
     private StringBuilder lostValue;
 
-    public ComposeLineFilter(Writeable<List<String>> output, int lineLenth) throws InvalidParameterException {
+    public ComposeLineFilter(Writeable<List<String>> output, int lineLength) throws InvalidParameterException {
         super(output);
-        neededLength = lineLenth;
+        neededLength = lineLength;
     }
+
 
     @Override
     protected boolean fillEntity(StringBuilder nextVal, List<String> entity) {
@@ -31,7 +32,8 @@ public class ComposeLineFilter extends DataCompositionFilter<StringBuilder, List
             entity.add(" ");
             return false;
         }
-        lostValue = nextVal;
+        if (nextVal != null)
+            lostValue = nextVal.toString();
         _linelength = 0;
         return true;
     }
