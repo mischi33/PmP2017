@@ -65,8 +65,7 @@ public class Main {
         Source source = new TextSourceA(pipe_7, "aliceInWonderland.txt");
         source.run();
     }
-
-    private static void exerciseB(String path, String alignment, int lineLength) {
+        private static void exerciseB(String path, String alignment, int lineLength) {
         Sink indexSink = new WriteIndexToFileSink(path + "indexB.txt");
         SimplePipe pipe_1 = new SimplePipe(indexSink);
         SortWordsFilter sortWordsFilter = new SortWordsFilter(pipe_1);
@@ -76,20 +75,22 @@ public class Main {
         UselessWordsFilter uselessWordsFilter = new UselessWordsFilter(pipe_3);
         SimplePipe pipe_4 = new SimplePipe((Writeable) uselessWordsFilter);
         CircularShift circularShift = new CircularShift(pipe_4);
+        SimplePipe pipe_5 = new SimplePipe((Writeable) circularShift);
+        RemoveSpecialChars removeSpecialChars = new RemoveSpecialChars(pipe_5);
 
 
         Sink storySink = new WriteNewTextToFileSink(path + "aliceInWonderlandNew.txt");
-        SimplePipe pipe_5 = new SimplePipe((Writeable) storySink);
-        AlignmentFilter alignmentFilter = new AlignmentFilter(pipe_5, lineLength + 20, alignment);
+        SimplePipe pipe_6 = new SimplePipe((Writeable) storySink);
+        AlignmentFilter alignmentFilter = new AlignmentFilter(pipe_6, lineLength + 20, alignment);
         SimplePipe pipe_b = new SimplePipe((Writeable) alignmentFilter);
         AddSpaceFilter addSpaceFilter = new AddSpaceFilter(pipe_b);
 
-        DoubleExitPipe doubleExitPipe = new DoubleExitPipe(addSpaceFilter, circularShift);
+        DoubleExitPipe doubleExitPipe = new DoubleExitPipe(addSpaceFilter, removeSpecialChars);
         ComposeLineFilter composeLineFilter = new ComposeLineFilter(doubleExitPipe, lineLength);
-        SimplePipe pipe_6 = new SimplePipe((Writeable) composeLineFilter);
-        ComposeWordFilter composeWordFilter = new ComposeWordFilter(pipe_6);
-        SimplePipe pipe_7 = new SimplePipe((Writeable) composeWordFilter);
-        Source source = new TextSourceB(pipe_7, "aliceInWonderland.txt");
+        SimplePipe pipe_7 = new SimplePipe((Writeable) composeLineFilter);
+        ComposeWordFilter composeWordFilter = new ComposeWordFilter(pipe_7);
+        SimplePipe pipe_8 = new SimplePipe((Writeable) composeWordFilter);
+        Source source = new TextSourceB(pipe_8, "test.txt");
         source.run();
     }
 
