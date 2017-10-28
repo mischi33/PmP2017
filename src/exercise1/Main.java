@@ -30,10 +30,10 @@ public class Main {
         SimplePipe pipe_4 = new SimplePipe((Writeable) uselessWordsFilter);
         CircularShift circularShifts = new CircularShift(pipe_4);
         SimplePipe pipe_5 = new SimplePipe((Writeable) circularShifts);
-        LineToWords linesToWords = new LineToWords(pipe_5);
-        SimplePipe pipe_6 = new SimplePipe((Writeable) linesToWords);
-        RemoveSpecialChars removeSpecialChars = new RemoveSpecialChars(pipe_6);
-        SimplePipe pipe_7 = new SimplePipe((Writeable) removeSpecialChars);
+        RemoveSpecialChars removeSpecialChars = new RemoveSpecialChars(pipe_5);
+        SimplePipe pipe_6 = new SimplePipe((Writeable) removeSpecialChars);
+        LineToWords linesToWords = new LineToWords(pipe_6);
+        SimplePipe pipe_7 = new SimplePipe((Writeable) linesToWords);
         Source source = new TextSourceA(pipe_7, "aliceInWonderland.txt");
         source.run();
     }
