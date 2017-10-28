@@ -44,8 +44,14 @@ public class AlignmentFilter extends DataTransformationFilter2<List<String>, Lis
                 alignList.add(" ");
             }
         }
-
-        alignList.addAll(list);
+        if(align.equals("left"))
+            return list;
+        else{
+            for(String s : list){
+                alignList.add(s);
+            }
+            
+        }
 
         return alignList;
     }

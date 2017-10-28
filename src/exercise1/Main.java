@@ -12,8 +12,8 @@ import pmp.pipes.SimplePipe;
  */
 public class Main {
     public static void main(String[] args) {
-        String alignment = "left";
-        int lineLength = 0;
+        String alignment = "right";
+        int lineLength = 10;
         String path = "";
 
         if (args.length > 0) {
@@ -68,9 +68,9 @@ public class Main {
 
     private static void exerciseB(String path, String alignment, int lineLength) {
         Sink indexSink = new WriteToFileSink(path + "indexB.txt");
-        Sink storySink = new WriteToFileSink(path + "aliceInWonderlandNew.txt");
+        Sink storySink = new WriteNewTextToFileSink(path + "aliceInWonderlandNew.txt");
         SimplePipe pipe_1 = new SimplePipe(indexSink);
-        AlignmentFilter alignmentFilter1 = new AlignmentFilter(pipe_1, 10, "right");
+        AlignmentFilter alignmentFilter1 = new AlignmentFilter(pipe_1, lineLength, alignment);
         SimplePipe pipe_a = new SimplePipe((Writeable) alignmentFilter1);
         SortWordsFilter sortWordsFilter = new SortWordsFilter(pipe_a);
         SimplePipe pipe_2 = new SimplePipe((Writeable) sortWordsFilter);
@@ -79,10 +79,10 @@ public class Main {
         UselessWordsFilter uselessWordsFilter = new UselessWordsFilter(pipe_3);
         SimplePipe pipe_4 = new SimplePipe((Writeable) uselessWordsFilter);
         CircularShift circularShift = new CircularShift(pipe_4);
-        SimplePipe pipe_5 = new SimplePipe((Writeable) storySink);
-        AlignmentFilter alignmentFilter = new AlignmentFilter(pipe_5, 10, "right");
+        SimplePipe pipe_5 = new SimplePipe(storySink);
+        AlignmentFilter alignmentFilter = new AlignmentFilter(pipe_5, lineLength, alignment);
         DoubleExitPipe doubleExitPipe = new DoubleExitPipe(alignmentFilter, circularShift);
-        ComposeLineFilter composeLineFilter = new ComposeLineFilter(doubleExitPipe, 10);
+        ComposeLineFilter composeLineFilter = new ComposeLineFilter(doubleExitPipe, lineLength);
         SimplePipe pipe_6 = new SimplePipe((Writeable) composeLineFilter);
         ComposeWordFilter composeWordFilter = new ComposeWordFilter(pipe_6);
         SimplePipe pipe_7 = new SimplePipe((Writeable) composeWordFilter);

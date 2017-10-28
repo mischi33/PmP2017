@@ -24,7 +24,7 @@ public class WordsToLines extends DataTransformationFilter2<List<List<String>>, 
         for (int i = 0; i < entity.size(); i++) {
             StringBuilder sb = new StringBuilder();
             for (int j = 0; j < entity.get(i).size(); j++) {
-                sb.append(entity.get(i).get(j) + " ");
+                sb.append(entity.get(i).get(j) +" ");
             }
             result.add(sb.toString());
         }
