@@ -20,9 +20,12 @@ public class RemoveSpecialChars extends DataTransformationFilter2<String, String
 
     @Override
     protected String process(String entity) {
-        String newEntity = entity.replaceAll("[^\\w\\s]","");
-        newEntity = newEntity.replaceAll("  +", "");
-        newEntity = newEntity.replaceAll("^\\s+","");
-        return newEntity;
+        /**
+         * "[^\w\s]" removes all special characters (except "_")
+         * "  +" removes all empty lines that appear more than once
+         * ^\s+ removes all whitespace characters at the beginning of a line
+         * "_" removes underscore since this does not work with the first regex
+         */
+        return entity.replaceAll("[^\\w\\s]","").replaceAll("  +", "").replaceAll("^\\s+","").replaceAll("_", "");
     }
 }
