@@ -30,7 +30,7 @@ public class ComposeLineFilter extends DataCompositionFilter<StringBuilder, List
         }
         if (nextVal != null && (_linelength + nextVal.length() + 1) <= neededLength) {
             entity.add(nextVal.toString());
-            _linelength=_linelength+nextVal.length()+1;
+            _linelength=_linelength+nextVal.length() +1;
             return false;
         }
         if (nextVal != null)

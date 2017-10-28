@@ -12,7 +12,7 @@ import pmp.pipes.SimplePipe;
  */
 public class Main {
     public static void main(String[] args) {
-        String alignment = "right";
+        String alignment = "center";
         int lineLength = 10;
         String path = "";
 
@@ -68,7 +68,6 @@ public class Main {
 
     private static void exerciseB(String path, String alignment, int lineLength) {
         Sink indexSink = new WriteToFileSink(path + "indexB.txt");
-        Sink storySink = new WriteNewTextToFileSink(path + "aliceInWonderlandNew.txt");
         SimplePipe pipe_1 = new SimplePipe(indexSink);
         AlignmentFilter alignmentFilter1 = new AlignmentFilter(pipe_1, lineLength, alignment);
         SimplePipe pipe_a = new SimplePipe((Writeable) alignmentFilter1);
@@ -79,9 +78,15 @@ public class Main {
         UselessWordsFilter uselessWordsFilter = new UselessWordsFilter(pipe_3);
         SimplePipe pipe_4 = new SimplePipe((Writeable) uselessWordsFilter);
         CircularShift circularShift = new CircularShift(pipe_4);
-        SimplePipe pipe_5 = new SimplePipe(storySink);
-        AlignmentFilter alignmentFilter = new AlignmentFilter(pipe_5, lineLength, alignment);
-        DoubleExitPipe doubleExitPipe = new DoubleExitPipe(alignmentFilter, circularShift);
+
+
+        Sink storySink = new WriteNewTextToFileSink(path + "aliceInWonderlandNew.txt");
+        SimplePipe pipe_5 = new SimplePipe((Writeable) storySink);
+        AlignmentFilter alignmentFilter = new AlignmentFilter(pipe_5, lineLength + 20, alignment);
+        SimplePipe pipe_b = new SimplePipe((Writeable) alignmentFilter);
+        AddSpaceFilter addSpaceFilter = new AddSpaceFilter(pipe_b);
+
+        DoubleExitPipe doubleExitPipe = new DoubleExitPipe(addSpaceFilter, circularShift);
         ComposeLineFilter composeLineFilter = new ComposeLineFilter(doubleExitPipe, lineLength);
         SimplePipe pipe_6 = new SimplePipe((Writeable) composeLineFilter);
         ComposeWordFilter composeWordFilter = new ComposeWordFilter(pipe_6);
