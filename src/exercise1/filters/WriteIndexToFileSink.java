@@ -9,12 +9,12 @@ import java.util.List;
 /**
  * Created by Michelle on 27.10.2017.
  */
-public class WriteToFileSink extends Sink<List<String>> {
+public class WriteIndexToFileSink extends Sink<List<String>> {
     private String _file;
     private BufferedWriter _writer;
 
 
-    public WriteToFileSink(String file) {
+    public WriteIndexToFileSink(String file) {
         _file = file;
         try {
             _writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(_file), "UTF-8"));

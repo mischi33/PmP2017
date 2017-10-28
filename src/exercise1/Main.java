@@ -48,7 +48,7 @@ public class Main {
     }
 
     private static void exerciseA(String path) {
-        Sink writeToFileSink = new WriteToFileSink(path + "indexA.txt");
+        Sink writeToFileSink = new WriteIndexToFileSink(path + "indexA.txt");
         SimplePipe pipe_1 = new SimplePipe(writeToFileSink);
         SortWordsFilter sortFilter = new SortWordsFilter(pipe_1);
         SimplePipe pipe_2 = new SimplePipe((Writeable) sortFilter);
@@ -67,7 +67,7 @@ public class Main {
     }
 
     private static void exerciseB(String path, String alignment, int lineLength) {
-        Sink indexSink = new WriteToFileSink(path + "indexB.txt");
+        Sink indexSink = new WriteIndexToFileSink(path + "indexB.txt");
         SimplePipe pipe_1 = new SimplePipe(indexSink);
         AlignmentFilter alignmentFilter1 = new AlignmentFilter(pipe_1, lineLength, alignment);
         SimplePipe pipe_a = new SimplePipe((Writeable) alignmentFilter1);
