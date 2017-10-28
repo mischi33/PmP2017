@@ -1,5 +1,3 @@
-
-
 Hello World!
 How are you?
 This is nice!
@@ -7,4 +5,3 @@ I am Michelle.
 This is a very important test.
 Let's test this!
 Bye World!
-test;.,:!"2?)(/%&[]{}_-
