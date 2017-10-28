@@ -13,7 +13,7 @@ import pmp.pipes.SimplePipe;
 public class Main {
     public static void main(String[] args) {
         String alignment = "center";
-        int lineLength = 15;
+        int lineLength = 10;
         String path = "";
 
         if (args.length > 0) {
@@ -48,7 +48,7 @@ public class Main {
     }
 
     private static void exerciseA(String path) {
-        Sink writeToFileSink = new WriteToFileSink(path + "indexA.txt");
+        Sink writeToFileSink = new WriteIndexToFileSink(path + "indexA.txt");
         SimplePipe pipe_1 = new SimplePipe(writeToFileSink);
         SortWordsFilter sortFilter = new SortWordsFilter(pipe_1);
         SimplePipe pipe_2 = new SimplePipe((Writeable) sortFilter);
@@ -67,21 +67,24 @@ public class Main {
     }
 
     private static void exerciseB(String path, String alignment, int lineLength) {
-        Sink indexSink = new WriteToFileSink(path + "indexB.txt");
-        Sink storySink = new WriteNewTextToFileSink(path + "aliceInWonderlandNew.txt");
+        Sink indexSink = new WriteIndexToFileSink(path + "indexB.txt");
         SimplePipe pipe_1 = new SimplePipe(indexSink);
         SortWordsFilter sortWordsFilter = new SortWordsFilter(pipe_1);
         SimplePipe pipe_2 = new SimplePipe((Writeable) sortWordsFilter);
-        AlignmentFilter alignmentFilter1 = new AlignmentFilter(pipe_2, lineLength, alignment);
-        SimplePipe pipe_a = new SimplePipe((Writeable) alignmentFilter1);
-        WordsToLines wordsToLines = new WordsToLines(pipe_a);
+        WordsToLines wordsToLines = new WordsToLines(pipe_2);
         SimplePipe pipe_3 = new SimplePipe((Writeable) wordsToLines);
         UselessWordsFilter uselessWordsFilter = new UselessWordsFilter(pipe_3);
         SimplePipe pipe_4 = new SimplePipe((Writeable) uselessWordsFilter);
         CircularShift circularShift = new CircularShift(pipe_4);
-        SimplePipe pipe_5 = new SimplePipe(storySink);
-        AlignmentFilter alignmentFilter = new AlignmentFilter(pipe_5, lineLength, alignment);
-        DoubleExitPipe doubleExitPipe = new DoubleExitPipe(alignmentFilter, circularShift);
+
+
+        Sink storySink = new WriteNewTextToFileSink(path + "aliceInWonderlandNew.txt");
+        SimplePipe pipe_5 = new SimplePipe((Writeable) storySink);
+        AlignmentFilter alignmentFilter = new AlignmentFilter(pipe_5, lineLength + 20, alignment);
+        SimplePipe pipe_b = new SimplePipe((Writeable) alignmentFilter);
+        AddSpaceFilter addSpaceFilter = new AddSpaceFilter(pipe_b);
+
+        DoubleExitPipe doubleExitPipe = new DoubleExitPipe(addSpaceFilter, circularShift);
         ComposeLineFilter composeLineFilter = new ComposeLineFilter(doubleExitPipe, lineLength);
         SimplePipe pipe_6 = new SimplePipe((Writeable) composeLineFilter);
         ComposeWordFilter composeWordFilter = new ComposeWordFilter(pipe_6);
