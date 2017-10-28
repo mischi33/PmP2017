@@ -38,6 +38,8 @@ public class Main {
     }
 
     private static void exerciseB(String s) {
+        TextSourceB textSourceB=new TextSourceB("test.txt");
+
     }
 
 }
